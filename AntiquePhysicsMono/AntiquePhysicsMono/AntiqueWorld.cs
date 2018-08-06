@@ -41,8 +41,11 @@ namespace AntiquePhysicsMono
 
             Parallel.ForEach(bodies, (bod) => {
 
-                bod.EnactForce(gravity);
-                bod.EnactForce(wind);
+                if(bod is RigidBody)
+                {
+                    bod.EnactForce(gravity);
+                    bod.EnactForce(wind);
+                }
 
             });
 
