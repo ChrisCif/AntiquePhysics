@@ -24,9 +24,23 @@ namespace AntiquePhysicsMono
             gravity = new Vector2(0f, 2.0f);
             wind = new Vector2(0f, 0f);
         }
+        public AntiqueWorld(float gravForce, float windForce)
+        {
+            bodies = new List<Body>();
+            map = new Rectangle(0, 0, 800, 480);
+            gravity = new Vector2(0f, gravForce);
+            wind = new Vector2(windForce, 0.0f);
+        }
+
+        public void AddBody(Body bod)
+        {
+            bodies.Add(bod);
+        }
 
         public void Update()
         {
+
+            WorldForces();
 
             Parallel.ForEach(bodies, (bod) => {
 
@@ -39,6 +53,7 @@ namespace AntiquePhysicsMono
         public void WorldForces()
         {
 
+            /*
             Parallel.ForEach(bodies, (bod) => {
 
                 if(bod is RigidBody)
@@ -48,6 +63,15 @@ namespace AntiquePhysicsMono
                 }
 
             });
+            */
+
+            foreach(RigidBody rbod in bodies)   // TODO: Parallel
+            {
+
+                rbod.EnactForce(gravity);
+                rbod.EnactForce(wind);
+
+            }
 
         }
 

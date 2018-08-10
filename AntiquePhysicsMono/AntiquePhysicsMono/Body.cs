@@ -12,7 +12,7 @@ namespace AntiquePhysicsMono
     abstract class Body
     {
 
-        protected Rectangle box { get; }
+        protected Rectangle box;
 
         public Body(Rectangle box)
         {
@@ -22,6 +22,8 @@ namespace AntiquePhysicsMono
         {
             this.box = new Rectangle(x, y, width, height);
         }
+
+        public Rectangle GetBox() { return box; }
 
         public void Move(Vector2 trans)
         {

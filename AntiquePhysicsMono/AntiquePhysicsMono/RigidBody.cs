@@ -24,12 +24,17 @@ namespace AntiquePhysicsMono
             masterForce = Vector2.Zero;
         }
 
+        public Vector2 GetMasterForce() { return masterForce; }
+
         public void EnactForce(Vector2 externalForce)
         {
 
             masterForce += externalForce;
 
-            // TODO: Limit force
+            if (Math.Abs(masterForce.X) > MAX_FORCE)
+                masterForce.X = MAX_FORCE * (masterForce.X / Math.Abs(masterForce.X));
+            if (Math.Abs(masterForce.Y) > MAX_FORCE)
+                masterForce.Y = MAX_FORCE * (masterForce.Y / Math.Abs(masterForce.Y));
 
         }
         

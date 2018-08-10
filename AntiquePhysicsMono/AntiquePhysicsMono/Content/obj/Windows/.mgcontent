@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>D:/repo/AntiquePhysics/AntiquePhysicsMono/AntiquePhysicsMono/Content/devito_emoji.png</File>
+    <File>D:/repo/AntiquePhysics/AntiquePhysicsMono/AntiquePhysicsMono/Content/myFont.spritefont</File>
+  </SourceFiles>
+</SourceFileCollection>
