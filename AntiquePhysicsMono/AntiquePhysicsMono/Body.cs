@@ -13,6 +13,7 @@ namespace AntiquePhysicsMono
     {
 
         protected Rectangle box;
+        protected bool isSolid;
 
         public Body(Rectangle box)
         {
@@ -33,6 +34,8 @@ namespace AntiquePhysicsMono
         }
 
         public abstract void Update();
+
+        public bool IsSolid() { return isSolid; }
 
     }
 }
