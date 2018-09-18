@@ -49,9 +49,29 @@ namespace AntiquePhysicsMono
             {
                 for(int r = 0; r < tiles.GetLength(1); r++)
                 {
-                    tiles[c, r] = new Tile(c * tileSize, r * tileSize, tileSize, false);
+                    tiles[c, r] = new Tile(c * tileSize, r * tileSize, tileSize, false, false);
                 }
             }
+        }
+
+        public Tile[,] GetIntrsctTiles(Rectangle box)
+        {
+
+            var boundWidth = ((box.Right - box.Left) / tileSize) + 1;
+            var boundHeight = ((box.Bottom - box.Top) / tileSize) + 1;
+            Tile[,] intrsctTiles = new Tile[boundWidth, boundHeight];
+            for(int c = 0; c < boundWidth; c++)
+            {
+                for(int r = 0; r < boundHeight; r++)
+                {
+
+                    intrsctTiles[c, r] = tiles[(box.Left / tileSize) + c, (box.Top / tileSize) + r];
+                    
+                }
+            }
+
+            return intrsctTiles;
+
         }
 
         public void AddBody(Body bod)
@@ -98,6 +118,7 @@ namespace AntiquePhysicsMono
             {
 
                 // TODO: Collisions
+                rbod.Collide();
 
             });
 

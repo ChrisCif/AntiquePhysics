@@ -37,7 +37,28 @@ namespace AntiquePhysicsMono
                 masterForce.Y = MAX_FORCE * (masterForce.Y / Math.Abs(masterForce.Y));
 
         }
-        
+
+        public void Collide(AntiqueWorld world)
+        {
+
+            // Get this location box
+            var nowBox = GetBox();
+
+            // Get next location box
+            var thenBox = new Rectangle(nowBox.X + (int)GetMasterForce().X, nowBox.Y + (int)GetMasterForce().Y, nowBox.Width, nowBox.Height);
+
+            // Get full movement box
+            var boundLeft = Math.Min(nowBox.Left, thenBox.Left);
+            var boundTop = Math.Min(nowBox.Top, thenBox.Top);
+            var boundRight = Math.Max(nowBox.Right, thenBox.Right);
+            var boundBottom = Math.Max(nowBox.Bottom, thenBox.Bottom);
+            var boundBox = new Rectangle(boundLeft, boundTop, boundRight - boundLeft, boundBottom - boundTop);
+
+            // Get intersected tiles
+            Tile[,] checkTiles = world.GetIntrsctTiles(boundBox);
+
+        }
+
         public override void Update()
         {
 
