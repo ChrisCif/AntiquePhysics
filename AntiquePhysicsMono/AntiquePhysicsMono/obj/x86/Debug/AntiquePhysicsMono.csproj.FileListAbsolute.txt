@@ -24,3 +24,4 @@ D:\repo\AntiquePhysics\AntiquePhysicsMono\AntiquePhysicsMono\obj\x86\Debug\Antiq
 D:\repo\AntiquePhysics\AntiquePhysicsMono\AntiquePhysicsMono\obj\x86\Debug\AntiquePhysicsMono.exe
 D:\repo\AntiquePhysics\AntiquePhysicsMono\AntiquePhysicsMono\obj\x86\Debug\AntiquePhysicsMono.pdb
 D:\repo\AntiquePhysics\AntiquePhysicsMono\AntiquePhysicsMono\bin\Windows\x86\Debug\Content\myFont.xnb
+D:\repo\AntiquePhysics\AntiquePhysicsMono\AntiquePhysicsMono\bin\Windows\x86\Debug\Content\smwBlock.xnb

@@ -42,7 +42,7 @@ namespace AntiquePhysicsMono
 
         public bool IsSolid() { return isSolid; }
         public bool IsInteractable() { return interactable; }
-        public bool isCollidable() { return (isSolid && !interactable); }
+        public bool IsCollidable() { return (isSolid && !interactable); }
 
     }
 }

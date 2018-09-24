@@ -13,27 +13,49 @@ namespace AntiquePhysicsMono
     {
 
         protected Rectangle boundbox;
-        protected bool isSolid;
-        protected bool isInteractable;
+        protected Body content;
 
         public Tile()
         {
             this.boundbox = new Rectangle(0, 0, 10, 10);
-            this.isSolid = false;
-            this.isInteractable = false;
         }
-        public Tile(Rectangle boundbox, bool isSolid, bool isInteractable)
+        public Tile(Rectangle boundbox)
         {
+
             this.boundbox = boundbox;
-            this.isSolid = isSolid;
-            this.isInteractable = isInteractable;
+            this.content = null;
+
         }
-        public Tile(int x, int y, int size, bool isSolid, bool isInteractable)
+        public Tile(Rectangle boundbox, Body content)
         {
-            this.boundbox = new Rectangle(x, y, size, size);
-            this.isSolid = isSolid;
-            this.isInteractable = isInteractable;
+
+            this.boundbox = boundbox;
+            this.content = content;
+
         }
+        public Tile(int x, int y, int size)
+        {
+
+            this.boundbox = new Rectangle(x, y, size, size);
+            this.content = null;
+
+        }
+        public Tile(int x, int y, int size, Body content)
+        {
+
+            this.boundbox = new Rectangle(x, y, size, size);
+            this.content = content;
+
+        }
+
+        public void Fill(Body content)
+        {
+            this.content = content;
+        }
+
+        public Rectangle GetBox() { return boundbox; }
+        public Body GetContent() { return content; }
+        
 
     }
 }

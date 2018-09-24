@@ -13,8 +13,8 @@ namespace AntiquePhysicsMono
     {
 
         private Rectangle map { get; }
-        private Tile[,] tiles;
         private int tileSize;
+        private Tile[,] tiles;
 
         private List<Body> bodies { get; }
         private List<RigidBody> rbodies { get; }
@@ -25,31 +25,51 @@ namespace AntiquePhysicsMono
         
         public AntiqueWorld()
         {
-            bodies = new List<Body>();
-            rbodies = new List<RigidBody>();
-            map = new Rectangle(0, 0, 800, 480);
-            tiles = new Tile[800 / tileSize, 480 / tileSize];
-            PopuateTiles();
-            gravity = new Vector2(0f, 2.0f);
-            wind = new Vector2(0f, 0f);
+
+            this.bodies = new List<Body>();
+            this.rbodies = new List<RigidBody>();
+            this.map = new Rectangle(0, 0, 800, 480);
+            this.tileSize = 10;
+            this.tiles = new Tile[800 / tileSize, 480 / tileSize];
+            this.GenerateTiles();
+            this.gravity = new Vector2(0.0f, 2.0f);
+            this.wind = new Vector2(0.0f, 0.0f);
+
         }
         public AntiqueWorld(float gravForce, float windForce)
         {
-            bodies = new List<Body>();
-            rbodies = new List<RigidBody>();
-            map = new Rectangle(0, 0, 800, 480);
-            PopuateTiles();
-            gravity = new Vector2(0f, gravForce);
-            wind = new Vector2(windForce, 0.0f);
+
+            this.bodies = new List<Body>();
+            this.rbodies = new List<RigidBody>();
+            this.map = new Rectangle(0, 0, 800, 480);
+            this.tileSize = 10;
+            this.tiles = new Tile[800 / tileSize, 480 / tileSize];
+            this.GenerateTiles();
+            this.gravity = new Vector2(0f, gravForce);
+            this.wind = new Vector2(windForce, 0.0f);
+
+        }
+        public AntiqueWorld(float gravForce, float windForce, int tileSize)
+        {
+
+            this.bodies = new List<Body>();
+            this.rbodies = new List<RigidBody>();
+            this.map = new Rectangle(0, 0, 800, 480);
+            this.tileSize = tileSize;
+            this.tiles = new Tile[800 / tileSize, 480 / tileSize];
+            this.GenerateTiles();
+            this.gravity = new Vector2(0f, gravForce);
+            this.wind = new Vector2(windForce, 0.0f);
+
         }
 
-        private void PopuateTiles()
+        protected void GenerateTiles()
         {
             for(int c = 0; c < tiles.GetLength(0); c++)
             {
                 for(int r = 0; r < tiles.GetLength(1); r++)
                 {
-                    tiles[c, r] = new Tile(c * tileSize, r * tileSize, tileSize, false, false);
+                    tiles[c, r] = new Tile(c * tileSize, r * tileSize, tileSize, null);
                 }
             }
         }
@@ -65,6 +85,7 @@ namespace AntiquePhysicsMono
                 for(int r = 0; r < boundHeight; r++)
                 {
 
+                    // TODO: Index out of bounds
                     intrsctTiles[c, r] = tiles[(box.Left / tileSize) + c, (box.Top / tileSize) + r];
                     
                 }
@@ -76,7 +97,11 @@ namespace AntiquePhysicsMono
 
         public void AddBody(Body bod)
         {
+
             bodies.Add(bod);
+            var tile = tiles[bod.GetBox().Left / tileSize, bod.GetBox().Top / tileSize];
+            tile.Fill(bod);
+
         }
         public void AddRigidBody(RigidBody rbod)
         {
@@ -118,7 +143,7 @@ namespace AntiquePhysicsMono
             {
 
                 // TODO: Collisions
-                rbod.Collide();
+                rbod.Collide(this);
 
             });
 
