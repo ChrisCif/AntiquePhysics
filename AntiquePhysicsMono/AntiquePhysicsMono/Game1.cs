@@ -42,7 +42,7 @@ namespace AntiquePhysicsMono
             
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            testChar = Content.Load<Texture2D>("devito_emoji");
+            testChar = Content.Load<Texture2D>("danny");
             testBlockTex = Content.Load<Texture2D>("smwBlock");
             font = Content.Load<SpriteFont>("myFont");
             
@@ -63,10 +63,15 @@ namespace AntiquePhysicsMono
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (ButtonHeld(PlayerIndex.One, Buttons.A))
+            if (ButtonHeld(PlayerIndex.One, Buttons.A)  ||  Keyboard.GetState().IsKeyDown(Keys.Up))
             {
                 testBod.EnactForce(new Vector2(0.0f, -3.0f));
             }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                testBod.EnactForce(new Vector2(-1.0f, 0f));
+            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+                testBod.EnactForce(new Vector2(1.0f, 0f));
             testBod.EnactForce(new Vector2(GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X, 0.0f));
 
             myWorld.Update();
@@ -83,7 +88,11 @@ namespace AntiquePhysicsMono
             spriteBatch.Draw(testChar, testBod.GetBox(), Color.White);
 
             // Draw Tile
-            spriteBatch.Draw(testBlockTex, testBlock.GetBox(), Color.White);
+            var myColor = Color.White;
+            if (testBlock.isIntr)
+                myColor = Color.Red;
+
+            spriteBatch.Draw(testBlockTex, testBlock.GetBox(), myColor);
 
             spriteBatch.DrawString(font, "" + testBod.GetMasterForce(), Vector2.Zero, Color.White);
 

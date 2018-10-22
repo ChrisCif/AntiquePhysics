@@ -4,8 +4,9 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>D:/repo/AntiquePhysics/AntiquePhysicsMono/AntiquePhysicsMono/Content/devito_emoji.png</File>
-    <File>D:/repo/AntiquePhysics/AntiquePhysicsMono/AntiquePhysicsMono/Content/myFont.spritefont</File>
-    <File>D:/repo/AntiquePhysics/AntiquePhysicsMono/AntiquePhysicsMono/Content/smwBlock.png</File>
+    <File>C:/Users/Cif/source/repos/AntiquePhysics/AntiquePhysicsMono/AntiquePhysicsMono/Content/devito_emoji.png</File>
+    <File>C:/Users/Cif/source/repos/AntiquePhysics/AntiquePhysicsMono/AntiquePhysicsMono/Content/myFont.spritefont</File>
+    <File>C:/Users/Cif/source/repos/AntiquePhysics/AntiquePhysicsMono/AntiquePhysicsMono/Content/smwBlock.png</File>
+    <File>C:/Users/Cif/source/repos/AntiquePhysics/AntiquePhysicsMono/AntiquePhysicsMono/Content/danny.png</File>
   </SourceFiles>
 </SourceFileCollection>

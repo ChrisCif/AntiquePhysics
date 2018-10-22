@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Cif/source/repos/AntiquePhysics/AntiquePhysicsMono/AntiquePhysicsMono/Content/devito_emoji.png</SourceFile>
-  <SourceTime>2018-09-03T14:48:27.1689973-04:00</SourceTime>
-  <DestFile>C:/Users/Cif/source/repos/AntiquePhysics/AntiquePhysicsMono/AntiquePhysicsMono/Content/bin/Windows/devito_emoji.xnb</DestFile>
-  <DestTime>2018-10-22T11:23:03.7841123-04:00</DestTime>
+  <SourceFile>C:/Users/Cif/source/repos/AntiquePhysics/AntiquePhysicsMono/AntiquePhysicsMono/Content/danny.png</SourceFile>
+  <SourceTime>2018-10-22T11:59:50.1140051-04:00</SourceTime>
+  <DestFile>C:/Users/Cif/source/repos/AntiquePhysics/AntiquePhysicsMono/AntiquePhysicsMono/Content/bin/Windows/danny.xnb</DestFile>
+  <DestTime>2018-10-22T12:00:54.3783552-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T10:05:36-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

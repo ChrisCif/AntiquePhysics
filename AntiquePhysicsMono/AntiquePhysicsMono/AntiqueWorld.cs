@@ -43,7 +43,7 @@ namespace AntiquePhysicsMono
             this.rbodies = new List<RigidBody>();
             this.map = new Rectangle(0, 0, 800, 480);
             this.tileSize = 10;
-            this.tiles = new Tile[800 / tileSize, 480 / tileSize];
+            this.tiles = new Tile[2000 / tileSize, 2000 / tileSize];
             this.GenerateTiles();
             this.gravity = new Vector2(0f, gravForce);
             this.wind = new Vector2(windForce, 0.0f);
@@ -77,6 +77,13 @@ namespace AntiquePhysicsMono
         public Tile[,] GetIntrsctTiles(Rectangle box)
         {
 
+            foreach(Tile t in tiles)
+            {
+                if(t.GetContent() != null)
+                    t.GetContent().isIntr = false;
+            }
+
+
             var boundWidth = ((box.Right - box.Left) / tileSize) + 1;
             var boundHeight = ((box.Bottom - box.Top) / tileSize) + 1;
             Tile[,] intrsctTiles = new Tile[boundWidth, boundHeight];
@@ -86,7 +93,11 @@ namespace AntiquePhysicsMono
                 {
 
                     // TODO: Index out of bounds
-                    intrsctTiles[c, r] = tiles[(box.Left / tileSize) + c, (box.Top / tileSize) + r];
+
+                    var myTile = tiles[(box.Left / tileSize) + c, (box.Top / tileSize) + r];
+                    if(myTile.GetContent() != null)
+                        myTile.GetContent().isIntr = true;
+                    intrsctTiles[c, r] = myTile;
                     
                 }
             }
@@ -141,8 +152,7 @@ namespace AntiquePhysicsMono
 
             Parallel.ForEach(rbodies, (rbod) =>
             {
-
-                // TODO: Collisions
+                
                 rbod.Collide(this);
 
             });

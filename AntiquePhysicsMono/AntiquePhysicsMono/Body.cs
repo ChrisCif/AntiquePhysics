@@ -16,6 +16,9 @@ namespace AntiquePhysicsMono
         protected bool isSolid; // Whether or not collisions are calculated for this body
         protected bool interactable;    // Whether or not collisions are allowed with creatures
 
+        // Debug
+        public bool isIntr;
+
         public Body(Rectangle box, bool isSolid, bool interactable)
         {
             this.box = box;
