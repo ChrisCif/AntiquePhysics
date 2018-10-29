@@ -54,3 +54,4 @@ C:\Users\Cif\source\repos\AntiquePhysics\AntiquePhysicsMono\AntiquePhysicsMono\o
 C:\Users\Cif\source\repos\AntiquePhysics\AntiquePhysicsMono\AntiquePhysicsMono\obj\x86\Debug\AntiquePhysicsMono.exe
 C:\Users\Cif\source\repos\AntiquePhysics\AntiquePhysicsMono\AntiquePhysicsMono\obj\x86\Debug\AntiquePhysicsMono.pdb
 C:\Users\Cif\source\repos\AntiquePhysics\AntiquePhysicsMono\AntiquePhysicsMono\bin\Windows\x86\Debug\Content\danny.xnb
+C:\Users\Cif\source\repos\AntiquePhysics\AntiquePhysicsMono\AntiquePhysicsMono\bin\Windows\x86\Debug\Content\debugTexture.xnb

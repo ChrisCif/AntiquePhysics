@@ -61,6 +61,25 @@ namespace AntiquePhysicsMono
             }
 
         }
+        public Rectangle BounRectangle()
+        {
+
+            // Get this location box
+            var nowBox = GetBox();
+
+            // Get next location box
+            var thenBox = new Rectangle(nowBox.X + (int)GetMasterForce().X, nowBox.Y + (int)GetMasterForce().Y, nowBox.Width, nowBox.Height);
+
+            // Get full movement box
+            var boundLeft = Math.Min(nowBox.Left, thenBox.Left);
+            var boundTop = Math.Min(nowBox.Top, thenBox.Top);
+            var boundRight = Math.Max(nowBox.Right, thenBox.Right);
+            var boundBottom = Math.Max(nowBox.Bottom, thenBox.Bottom);
+            var boundBox = new Rectangle(boundLeft, boundTop, boundRight - boundLeft, boundBottom - boundTop);
+
+            return boundBox;
+
+        }
         private Tile[,] BoundTiles(AntiqueWorld world)
         {
 

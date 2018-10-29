@@ -13,6 +13,7 @@ namespace AntiquePhysicsMono
         Texture2D testChar;
         RigidBody testBlock;
         Texture2D testBlockTex;
+        Texture2D debugT;
         SpriteFont font;
 
         public Game1()
@@ -24,7 +25,7 @@ namespace AntiquePhysicsMono
         protected override void Initialize()
         {
             
-            myWorld = new AntiqueWorld(0.5f, 0.0f);
+            myWorld = new AntiqueWorld(0.15f, 0.0f);
 
             // Character
             testBod = new RigidBody(new Rectangle(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferWidth / 2, 40, 40), false, false);
@@ -44,6 +45,7 @@ namespace AntiquePhysicsMono
 
             testChar = Content.Load<Texture2D>("danny");
             testBlockTex = Content.Load<Texture2D>("smwBlock");
+            debugT = Content.Load<Texture2D>("debugTexture");
             font = Content.Load<SpriteFont>("myFont");
             
         }
@@ -65,13 +67,13 @@ namespace AntiquePhysicsMono
 
             if (ButtonHeld(PlayerIndex.One, Buttons.A)  ||  Keyboard.GetState().IsKeyDown(Keys.Up))
             {
-                testBod.EnactForce(new Vector2(0.0f, -3.0f));
+                testBod.EnactForce(new Vector2(0.0f, -1.0f));
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
-                testBod.EnactForce(new Vector2(-1.0f, 0f));
+                testBod.EnactForce(new Vector2(-0.3f, 0f));
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
-                testBod.EnactForce(new Vector2(1.0f, 0f));
+                testBod.EnactForce(new Vector2(0.3f, 0f));
             testBod.EnactForce(new Vector2(GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X, 0.0f));
 
             myWorld.Update();
@@ -95,6 +97,9 @@ namespace AntiquePhysicsMono
             spriteBatch.Draw(testBlockTex, testBlock.GetBox(), myColor);
 
             spriteBatch.DrawString(font, "" + testBod.GetMasterForce(), Vector2.Zero, Color.White);
+
+            // Debug
+            spriteBatch.Draw(debugT, testBod.BounRectangle(), Color.White * 0.3f);
 
             spriteBatch.End();
             base.Draw(gameTime);
