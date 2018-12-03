@@ -9,31 +9,75 @@ using Microsoft.Xna.Framework.Input;
 
 namespace AntiquePhysicsMono
 {
-    abstract class Body
+
+    public struct Circle
+    {
+        private Vector2 center;
+        private float radius;
+        
+        public Circle(Vector2 center, float radius)
+        {
+            this.center = center;
+            this.radius = radius;
+        }
+
+        public Vector2 GetCenter() { return center; }
+        public float GetRadius() { return radius; }
+
+    }
+
+    /*abstract*/ class Body
     {
 
-        protected Rectangle box;
-        protected bool isSolid; // Whether or not collisions are calculated for this body
-        protected bool interactable;    // Whether or not collisions are allowed with creatures
+        // Bounds
+        protected Rectangle box { get; set; }
+        protected Circle circle { get; set; }
+
+        // Physics
+        private Vector2 velocity { get; set; }
+        private Vector2 acceleration { get; set; }
+
+        //protected bool isSolid; // Whether or not collisions are calculated for this body
+        //protected bool interactable;    // Whether or not collisions are allowed with creatures
 
         // Debug
-        public bool isIntr;
+        //public bool isIntr;
 
-        public Body(Rectangle box, bool isSolid, bool interactable)
+        public Body(Rectangle box/*, bool isSolid, bool interactable*/)
         {
             this.box = box;
+            /*
             this.isSolid = isSolid;
             this.interactable = interactable;
+            */
         }
+        /*
         public Body(int x, int y, int width, int height, bool isSolid, bool interactable)
         {
             this.box = new Rectangle(x, y, width, height);
             this.isSolid = isSolid;
             this.interactable = interactable;
         }
+        */
 
+        // Accessors
         public Rectangle GetBox() { return box; }
+        public Circle GetCircle() { return circle; }
+        public Vector2 GetVelocity() { return velocity; }
+        public Vector2 GetAcceleration() { return acceleration; }
+        
+        public void EnactForce(Vector2 force)
+        {
 
+            this.acceleration += force;
+
+        }
+        public void Accelerate()
+        {
+
+            this.velocity += acceleration;
+
+        }
         public void Move(Vector2 trans)
         {
 
@@ -41,11 +85,25 @@ namespace AntiquePhysicsMono
 
         }
 
-        public abstract void Update();
+        public /*abstract*/ void Update()
+        {
 
+            // Accelerate
+            Accelerate();
+
+            // Move
+            Move(this.velocity);
+
+            // Reset acceleration
+            acceleration = Vector2.Zero;
+
+        }
+
+        /*
         public bool IsSolid() { return isSolid; }
         public bool IsInteractable() { return interactable; }
         public bool IsCollidable() { return (isSolid && !interactable); }
+        */
 
     }
 }
