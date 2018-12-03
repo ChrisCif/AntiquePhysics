@@ -25,7 +25,7 @@ namespace AntiquePhysicsMono
         protected override void Initialize()
         {
             
-            myWorld = new AntiqueWorld(0.15f, 0.0f);
+            myWorld = new AntiqueWorld(0.25f, 0.0f);
 
             // Character
             testBod = new RigidBody(new Rectangle(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferWidth / 2, 40, 40), false, false);
@@ -71,9 +71,9 @@ namespace AntiquePhysicsMono
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
-                testBod.EnactForce(new Vector2(-0.3f, 0f));
+                testBod.EnactForce(new Vector2(-.5f, 0f));
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
-                testBod.EnactForce(new Vector2(0.3f, 0f));
+                testBod.EnactForce(new Vector2(0.5f, 0f));
             testBod.EnactForce(new Vector2(GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X, 0.0f));
 
             myWorld.Update();
@@ -91,7 +91,7 @@ namespace AntiquePhysicsMono
 
             // Draw Tile
             var myColor = Color.White;
-            if (testBlock.isIntr)
+            if (testBlock.GetBox().Intersects(testBod.BoundRectangle()))
                 myColor = Color.Red;
 
             spriteBatch.Draw(testBlockTex, testBlock.GetBox(), myColor);
@@ -99,7 +99,8 @@ namespace AntiquePhysicsMono
             spriteBatch.DrawString(font, "" + testBod.GetMasterForce(), Vector2.Zero, Color.White);
 
             // Debug
-            spriteBatch.Draw(debugT, testBod.BounRectangle(), Color.White * 0.3f);
+            spriteBatch.Draw(debugT, testBod.BoundRectangle(), Color.White * 0.3f);
+            spriteBatch.Draw(debugT, testBod.GetBox(), Color.Blue * 0.3f);
 
             spriteBatch.End();
             base.Draw(gameTime);

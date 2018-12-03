@@ -61,7 +61,7 @@ namespace AntiquePhysicsMono
             }
 
         }
-        public Rectangle BounRectangle()
+        public Rectangle BoundRectangle()
         {
 
             // Get this location box
@@ -120,15 +120,15 @@ namespace AntiquePhysicsMono
             distance = (int)mAxis.Length();
 
             // Change velocity if necessary
-            /// Project vel onto MA
-            //// Get dot product (vel * MA)
+            //  Project vel onto MA
+            //      Get dot product (vel * MA)
             var dot = Vector2.Dot(masterForce, mAxis);
             
-            //// Multiply calculation to MA as a scalar
+            //      Multiply calculation to MA as a scalar
             var projScalar = (dot / Math.Pow(mAxis.Length(), 2));
             var proj = Vector2.Multiply(mAxis, (float)projScalar);
 
-            /// Vel is now the lesser between the proj vector length and the vel
+            //  Vel is now the lesser between the proj vector length and the vel
             if (proj.Length() > distance)
                 return distance;
 

@@ -124,7 +124,7 @@ namespace AntiquePhysicsMono
         {
 
             WorldForces();
-            Collisions();
+            //Collisions();
 
             Parallel.ForEach(bodies, (bod) => {
 
