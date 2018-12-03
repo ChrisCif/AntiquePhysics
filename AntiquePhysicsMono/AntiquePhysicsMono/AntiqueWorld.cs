@@ -74,6 +74,7 @@ namespace AntiquePhysicsMono
             }
         }
 
+        /*
         public Tile[,] GetIntrsctTiles(Rectangle box)
         {
 
@@ -105,6 +106,7 @@ namespace AntiquePhysicsMono
             return intrsctTiles;
 
         }
+        */
 
         public void AddBody(Body bod)
         {
@@ -114,11 +116,13 @@ namespace AntiquePhysicsMono
             tile.Fill(bod);
 
         }
+        /*
         public void AddRigidBody(RigidBody rbod)
         {
             rbodies.Add(rbod);
             AddBody(rbod);
         }
+        */
 
         public void Update()
         {

@@ -9,17 +9,17 @@ using Microsoft.Xna.Framework.Input;
 
 namespace AntiquePhysicsMono
 {
-    class RigidBody : Body
+    class RigidBody// : Body
     {
 
         protected Vector2 masterForce;
         protected const float MAX_FORCE = 10.0f;
 
-        public RigidBody(Rectangle box, bool isSolid, bool interactable) : base(box, isSolid, interactable)
+        public RigidBody(Rectangle box, bool isSolid, bool interactable)// : base(box, isSolid, interactable)
         {
             masterForce = Vector2.Zero;
         }
-        public RigidBody(int x, int y, int width, int height, bool isSolid, bool interactable) : base(x, y, width, height, isSolid, interactable)
+        public RigidBody(int x, int y, int width, int height, bool isSolid, bool interactable)// : base(x, y, width, height, isSolid, interactable)
         {
             masterForce = Vector2.Zero;
         }
@@ -41,6 +41,7 @@ namespace AntiquePhysicsMono
         public void Collide(AntiqueWorld world)
         {
 
+            /*
             var intersectedTiles = BoundTiles(world);
 
             foreach(Tile t in intersectedTiles)
@@ -59,8 +60,10 @@ namespace AntiquePhysicsMono
                 }
                 
             }
+            */
 
         }
+        /*
         public Rectangle BoundRectangle()
         {
 
@@ -80,6 +83,7 @@ namespace AntiquePhysicsMono
             return boundBox;
 
         }
+        
         private Tile[,] BoundTiles(AntiqueWorld world)
         {
 
@@ -144,13 +148,16 @@ namespace AntiquePhysicsMono
                 return new Vector2(0f, vec.Y);
 
         }
+        */
 
+        /*
         public override void Update()
         {
 
             Move(masterForce);
             
         }
+        */
 
     }
 }

@@ -14,15 +14,15 @@ namespace AntiquePhysicsMono
 
         protected float gravity = 2.0f; // Default
         protected float airResistance = 0.75f;   // Default
-
+        
         // Do colision detection on these
         protected List<Body> rigidBodies = new List<Body>();
 
         // Enact forces on these
         protected List<Body> forceBodies = new List<Body>();
 
-        // Keep track of these, but don't do forces or check their collisions
-        protected List<Body> ghostBodies = new List<Body>();
+        // Keep track of these no matter what
+        protected List<Body> masterBodies = new List<Body>();
         
         // Constructor
         public PhysicsWorld(float gravity, float airResistance)
@@ -36,6 +36,8 @@ namespace AntiquePhysicsMono
 
             // Gravity
             body.EnactForce(new Vector2(0.0f, gravity));
+
+            // TODO: Resistances
 
         }
 
@@ -64,6 +66,54 @@ namespace AntiquePhysicsMono
             float sum = (circleA.GetRadius() + circleB.GetRadius());
 
             return (diff < sum);
+
+        }
+
+        // Adding bodies
+        public void AddRigidBody(Body body)
+        {
+            rigidBodies.Add(body);
+            masterBodies.Add(body);
+        }
+        public void AddForceBody(Body body)
+        {
+            forceBodies.Add(body);
+            masterBodies.Add(body);
+        }
+        public void AddGhostBody(Body body)
+        {
+            masterBodies.Add(body);
+        }
+        public void AddRigidForceBody(Body body)
+        {
+            rigidBodies.Add(body);
+            forceBodies.Add(body);
+            masterBodies.Add(body);
+        }
+        // TODO: Maybe some more body adds
+
+
+        // Updates
+        public void Update()
+        {
+
+            // Enact forces on bodies
+            foreach(Body body in forceBodies)
+            {
+
+                WorldForces(body);
+
+            }
+
+            // TODO: Collisions
+
+            // Update all of the bodies after everything else
+            foreach(Body body in masterBodies)
+            {
+
+                body.Update();
+
+            }
 
         }
 
