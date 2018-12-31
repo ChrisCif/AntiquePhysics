@@ -104,6 +104,12 @@ namespace AntiquePhysicsMono
             return velocity;
 
         }
+        public void Decelerate(float factor)
+        {
+
+            this.velocity *= factor;
+
+        }
         public void Move(Vector2 trans)
         {
 
@@ -112,17 +118,22 @@ namespace AntiquePhysicsMono
 
         }
 
-        public /*abstract*/ void Update()
+        public /*abstract*/ void Update(float resistance)
         {
-
+            
             // Accelerate
             Accelerate();
+
+            
 
             // Move
             Move(this.velocity);
 
             // Reset acceleration
             acceleration = Vector2.Zero;
+
+            // Resistance
+            Decelerate(resistance);
 
         }
 
@@ -131,6 +142,6 @@ namespace AntiquePhysicsMono
         public bool IsInteractable() { return interactable; }
         public bool IsCollidable() { return (isSolid && !interactable); }
         */
-
+        
     }
 }

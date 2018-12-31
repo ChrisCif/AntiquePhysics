@@ -132,7 +132,7 @@ namespace AntiquePhysicsMono
 
             Parallel.ForEach(bodies, (bod) => {
 
-                bod.Update();
+                //bod.Update();
 
             });
 

@@ -29,7 +29,7 @@ namespace AntiquePhysicsMono
         {
 
             //myWorld = new AntiqueWorld(0.25f, 0.0f);
-            myWorld = new PhysicsWorld(0.0f, 0.0f);
+            myWorld = new PhysicsWorld(0.8f);
 
             // Character
             //testBod = new RigidBody(new Rectangle(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferWidth / 2, 40, 40), false, false);
@@ -91,25 +91,25 @@ namespace AntiquePhysicsMono
             // Up
             if(ButtonHeld(PlayerIndex.One, Buttons.DPadUp)  || KeyHeld(Keys.Up))
             {
-                testBod.EnactForce(new Vector2(0.0f, -1.0f));
+                testBod.EnactForce(new Vector2(0.0f, -1.75f));
             }
 
             // Down
             if (ButtonHeld(PlayerIndex.One, Buttons.DPadDown) || KeyHeld(Keys.Down))
             {
-                testBod.EnactForce(new Vector2(0.0f, 1.0f));
+                testBod.EnactForce(new Vector2(0.0f, 1.25f));
             }
 
             // Right
             if (ButtonHeld(PlayerIndex.One, Buttons.DPadRight) || KeyHeld(Keys.Right))
             {
-                testBod.EnactForce(new Vector2(1.0f, 0.0f));
+                testBod.EnactForce(new Vector2(1.25f, 0.0f));
             }
 
             // Left
             if (ButtonHeld(PlayerIndex.One, Buttons.DPadLeft) || KeyHeld(Keys.Left))
             {
-                testBod.EnactForce(new Vector2(-1.0f, 0.0f));
+                testBod.EnactForce(new Vector2(-1.25f, 0.0f));
             }
 
             myWorld.Update();
@@ -127,6 +127,9 @@ namespace AntiquePhysicsMono
 
             // Draw Block
             spriteBatch.Draw(testBlockTex, testBlock.GetBox(), Color.White);
+
+            // Debug
+            spriteBatch.DrawString(font, "Body Velocity: " + testBod.GetVelocity(), Vector2.Zero, Color.Yellow);
 
             /*
             // Draw Tile

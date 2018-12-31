@@ -13,7 +13,7 @@ namespace AntiquePhysicsMono
     {
 
         protected float gravity = 2.0f; // Default
-        protected float airResistance = 0.75f;   // Default
+        protected float airResistance = 0.9f;   // Default
         
         // Do colision detection on these
         protected List<Body> rigidBodies = new List<Body>();
@@ -24,7 +24,11 @@ namespace AntiquePhysicsMono
         // Keep track of these no matter what
         protected List<Body> masterBodies = new List<Body>();
         
-        // Constructor
+        // Constructors
+        public PhysicsWorld(float gravity)
+        {
+            this.gravity = gravity;
+        }
         public PhysicsWorld(float gravity, float airResistance)
         {
             this.gravity = gravity;
@@ -37,8 +41,8 @@ namespace AntiquePhysicsMono
             // Gravity
             body.EnactForce(new Vector2(0.0f, gravity));
 
-            // TODO: Resistances
-
+            // TODO: Wind?
+            
         }
 
         // If bodies are using rectangle collisions
@@ -111,7 +115,7 @@ namespace AntiquePhysicsMono
             foreach(Body body in masterBodies)
             {
 
-                body.Update();
+                body.Update(airResistance);
 
             }
 
