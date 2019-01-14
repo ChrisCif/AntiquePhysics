@@ -41,8 +41,10 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AntiqueSpritebatch.cs" />
     <Compile Include="AntiqueWorld.cs" />
     <Compile Include="Body.cs" />
+    <Compile Include="CollisionManager.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="PhysicsWorld.cs" />
     <Compile Include="Program.cs" />

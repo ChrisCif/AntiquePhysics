@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Cif/source/repos/AntiquePhysics/AntiquePhysicsMono/AntiquePhysicsMono/Content/debugTexture.png</SourceFile>
-  <SourceTime>2018-10-29T11:06:18.5790918-04:00</SourceTime>
-  <DestFile>C:/Users/Cif/source/repos/AntiquePhysics/AntiquePhysicsMono/AntiquePhysicsMono/Content/bin/Windows/debugTexture.xnb</DestFile>
-  <DestTime>2018-10-29T11:11:54.6634272-04:00</DestTime>
+  <SourceFile>D:/repo/AntiquePhysics/AntiquePhysicsMono/AntiquePhysicsMono/Content/debugTexture.png</SourceFile>
+  <SourceTime>2019-01-13T21:25:01.6539294-05:00</SourceTime>
+  <DestFile>D:/repo/AntiquePhysics/AntiquePhysicsMono/AntiquePhysicsMono/Content/bin/Windows/debugTexture.xnb</DestFile>
+  <DestTime>2019-01-13T21:25:14.7155586-05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T10:05:36-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

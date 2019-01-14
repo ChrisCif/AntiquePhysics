@@ -8,6 +8,7 @@ namespace AntiquePhysicsMono
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        AntiqueSpritebatch aSpriteBatch;
         //AntiqueWorld myWorld;
         PhysicsWorld myWorld;
         //RigidBody testBod;
@@ -48,12 +49,15 @@ namespace AntiquePhysicsMono
         {
             
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            aSpriteBatch = new AntiqueSpritebatch(spriteBatch);
 
             testBodTex = Content.Load<Texture2D>("danny");
             testBlockTex = Content.Load<Texture2D>("smwBlock");
             debugT = Content.Load<Texture2D>("debugTexture");
             font = Content.Load<SpriteFont>("myFont");
-            
+
+            aSpriteBatch.SetTexture(debugT);
+
         }
         
         protected override void UnloadContent()
@@ -130,6 +134,8 @@ namespace AntiquePhysicsMono
 
             // Debug
             spriteBatch.DrawString(font, "Body Velocity: " + testBod.GetVelocity(), Vector2.Zero, Color.Yellow);
+            aSpriteBatch.DrawVector(testBod.GetVelocity(), new Vector2(testBod.GetBox().Center.X, testBod.GetBox().Center.Y), testBod.GetVelocity().Length(), Color.Red);   // Draw velocity
+            aSpriteBatch.DrawVector(new Vector2(testBod.GetBox().Center.X, testBod.GetBox().Center.Y), new Vector2(testBlock.GetBox().Center.X, testBlock.GetBox().Center.Y), Color.Green); // Draw distance
 
             /*
             // Draw Tile
