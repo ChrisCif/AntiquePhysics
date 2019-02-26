@@ -68,13 +68,6 @@ namespace AntiquePhysicsMono
             this.circle = circle;
             this.mass = mass;
         }
-
-        // Accessors
-        public Rectangle GetBox() { return box; }
-        public Circle GetCircle() { return circle; }
-        public Vector2 GetVelocity() { return velocity; }
-        public Vector2 GetAcceleration() { return acceleration; }
-        public float GetMass() { return mass; }
         
         public void EnactForce(Vector2 force)
         {
@@ -118,17 +111,15 @@ namespace AntiquePhysicsMono
 
         }
 
-        public /*abstract*/ void Update(float resistance)
+        public void Update(float resistance)
         {
             
             // Accelerate
             Accelerate();
-
             
-
             // Move
             Move(this.velocity);
-
+            
             // Reset acceleration
             acceleration = Vector2.Zero;
 
@@ -136,12 +127,25 @@ namespace AntiquePhysicsMono
             Decelerate(resistance);
 
         }
-
-        /*
-        public bool IsSolid() { return isSolid; }
-        public bool IsInteractable() { return interactable; }
-        public bool IsCollidable() { return (isSolid && !interactable); }
-        */
         
+        #region Accessors
+
+        public Rectangle GetBox() { return box; }
+        public Circle GetCircle() { return circle; }
+        public Vector2 GetVelocity() { return velocity; }
+        public Vector2 GetAcceleration() { return acceleration; }
+        public float GetMass() { return mass; }
+
+        #endregion
+
+        #region Setters
+
+        public void SetVelocity(Vector2 velocity)
+        {
+            this.velocity = velocity;
+        }
+
+        #endregion
+
     }
 }

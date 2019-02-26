@@ -15,7 +15,7 @@ namespace AntiquePhysicsMono
 
         SpriteBatch spriteBatch;
         Texture2D debugTex;
-     
+
         public AntiqueSpritebatch(SpriteBatch spriteBatch)
         {
             this.spriteBatch = spriteBatch;
@@ -28,7 +28,7 @@ namespace AntiquePhysicsMono
 
         }
 
-        public void DrawVector(Vector2 vec, Vector2 origin, float length, Color color)
+        public void DrawVector(Vector2 origin, Vector2 vec, float length, Color color)
         {
 
             vec.Normalize();
@@ -49,7 +49,7 @@ namespace AntiquePhysicsMono
                 Vector2.Zero,
                 SpriteEffects.None,
                 0
-                );
+            );
 
         }
         public void DrawVector(Vector2 origin, Vector2 end, Color color)
@@ -73,9 +73,45 @@ namespace AntiquePhysicsMono
                 Vector2.Zero,
                 SpriteEffects.None,
                 0
-                );
+            );
 
         }
+
+        public void DrawProjection(Vector2 v, Vector2 u, Vector2 origin, Color color)
+        {
+            
+            var projVector = v.Project(u);
+            var lenMagnification = 5;   // Used to make the projected vector easier to see
+
+            DrawVector(origin, projVector, projVector.Length() * lenMagnification, color);
+            
+        }
+
+    }
+
+    public class VectorControl
+    {
+
+        Vector2 point;
+        Vector2 movementVector;
+
+        public VectorControl(Rectangle hBox)
+        {
+            point = new Vector2(hBox.X, hBox.Y);
+        }
+
+        public void MovePoint(Vector2 mvec)
+        {
+            movementVector += mvec;
+        }
+
+        public void Update()
+        {
+            point += movementVector;
+            movementVector = Vector2.Zero;
+        }
+
+        public Vector2 GetPoint() { return point; }
 
     }
 

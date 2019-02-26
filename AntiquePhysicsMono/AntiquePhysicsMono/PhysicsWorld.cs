@@ -23,8 +23,11 @@ namespace AntiquePhysicsMono
 
         // Keep track of these no matter what
         protected List<Body> masterBodies = new List<Body>();
-        
-        // Constructors
+
+        private CollisionManager collisionManager = new CollisionManager();
+
+        #region Constructor
+
         public PhysicsWorld(float gravity)
         {
             this.gravity = gravity;
@@ -34,6 +37,8 @@ namespace AntiquePhysicsMono
             this.gravity = gravity;
             this.airResistance = airResistance;
         }
+
+        #endregion
 
         public void WorldForces(Body body)
         {
@@ -45,36 +50,8 @@ namespace AntiquePhysicsMono
             
         }
 
-        // Deprecated - Now handeled by the Collision Manager
-        //// If bodies are using rectangle collisions
-        //public bool RectCollides(Body bodA, Body bodB)
-        //{
+        #region Add Bodies
 
-        //    Rectangle boxA = bodA.GetBox();
-        //    Rectangle boxB = bodB.GetBox();
-
-        //    return (boxA.Left < boxB.Right &&
-        //                boxA.Right > boxB.Left &&
-        //                boxA.Top < boxB.Bottom &&
-        //                boxA.Bottom > boxB.Top);
-
-        //}
-        
-        //// If bodies are using circular collisions
-        //public bool CircleCollides(Body bodA, Body bodB)
-        //{
-
-        //    Circle circleA = bodA.GetCircle();
-        //    Circle circleB = bodB.GetCircle();
-
-        //    float diff = (circleA.GetCenter() - circleB.GetCenter()).Length();
-        //    float sum = (circleA.GetRadius() + circleB.GetRadius());
-
-        //    return (diff < sum);
-
-        //}
-
-        // Adding bodies
         public void AddRigidBody(Body body)
         {
             solidBodies.Add(body);
@@ -97,6 +74,7 @@ namespace AntiquePhysicsMono
         }
         // TODO: Maybe some more body adds
 
+        #endregion
 
         // Updates
         public void Update()
@@ -109,9 +87,7 @@ namespace AntiquePhysicsMono
                 WorldForces(body);
 
             }
-
-            // TODO: Collisions
-
+            
             // Update all of the bodies after everything else
             foreach(Body body in masterBodies)
             {
@@ -119,6 +95,9 @@ namespace AntiquePhysicsMono
                 body.Update(airResistance);
 
             }
+
+            // Collisions
+            //collisionManager.RectCheckCollisions(solidBodies);
 
         }
 
