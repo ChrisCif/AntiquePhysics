@@ -12,22 +12,60 @@ namespace AntiquePhysicsMono
     class AntiqueWorld
     {
 
-        private Rectangle map { get; }
+        private Rectangle map;
         private int tileSize;
         private Tile[,] tiles;
 
-        private List<Body> bodies { get; }
-        private List<RigidBody> rbodies { get; }
+        private List<Body> bodies;
+        public List<Body> Bodies
+        {
+            get
+            {
+                return this.bodies;
+            }
+        }
+
+        private List<RigidBody> rigidbodies;
+        public List<RigidBody> RigidBodies
+        {
+            get
+            {
+                return this.rigidbodies;
+            }
+        }
 
         // Forces
-        private Vector2 gravity { get; set; }
-        private Vector2 wind { get; set; }
+        private Vector2 gravity;
+        public Vector2 Gravity
+        {
+            get
+            {
+                return this.gravity;
+            }
+            set
+            {
+                this.gravity = value;
+            }
+        }
+
+        private Vector2 wind;
+        public Vector2 Wind
+        {
+            get
+            {
+                return this.wind;
+            }
+            set
+            {
+                this.wind = value;
+            }
+        }
         
         public AntiqueWorld()
         {
 
             this.bodies = new List<Body>();
-            this.rbodies = new List<RigidBody>();
+            this.rigidbodies = new List<RigidBody>();
             this.map = new Rectangle(0, 0, 800, 480);
             this.tileSize = 10;
             this.tiles = new Tile[800 / tileSize, 480 / tileSize];
@@ -40,7 +78,7 @@ namespace AntiquePhysicsMono
         {
 
             this.bodies = new List<Body>();
-            this.rbodies = new List<RigidBody>();
+            this.rigidbodies = new List<RigidBody>();
             this.map = new Rectangle(0, 0, 800, 480);
             this.tileSize = 10;
             this.tiles = new Tile[2000 / tileSize, 2000 / tileSize];
@@ -53,7 +91,7 @@ namespace AntiquePhysicsMono
         {
 
             this.bodies = new List<Body>();
-            this.rbodies = new List<RigidBody>();
+            this.rigidbodies = new List<RigidBody>();
             this.map = new Rectangle(0, 0, 800, 480);
             this.tileSize = tileSize;
             this.tiles = new Tile[800 / tileSize, 480 / tileSize];
@@ -119,7 +157,7 @@ namespace AntiquePhysicsMono
         /*
         public void AddRigidBody(RigidBody rbod)
         {
-            rbodies.Add(rbod);
+            rigidBodies.Add(rbod);
             AddBody(rbod);
         }
         */
@@ -141,7 +179,7 @@ namespace AntiquePhysicsMono
         public void WorldForces()
         {
 
-            Parallel.ForEach(rbodies, (rbod) =>
+            Parallel.ForEach(rigidbodies, (rbod) =>
             {
 
                 rbod.EnactForce(gravity);
@@ -154,7 +192,7 @@ namespace AntiquePhysicsMono
         public void Collisions()
         {
 
-            Parallel.ForEach(rbodies, (rbod) =>
+            Parallel.ForEach(rigidbodies, (rbod) =>
             {
                 
                 rbod.Collide(this);

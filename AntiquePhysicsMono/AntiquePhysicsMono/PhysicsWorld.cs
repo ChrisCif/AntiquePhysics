@@ -17,12 +17,33 @@ namespace AntiquePhysicsMono
         
         // Do colision detection on these
         protected List<Body> solidBodies = new List<Body>();
+        public List<Body> SolidBodies
+        {
+            get
+            {
+                return solidBodies;
+            }
+        }
 
         // Enact forces on these
         protected List<Body> rigidBodies = new List<Body>();
+        public List<Body> RigidBodies
+        {
+            get
+            {
+                return rigidBodies;
+            }
+        }
 
         // Keep track of these no matter what
         protected List<Body> masterBodies = new List<Body>();
+        public List<Body> MasterBodies
+        {
+            get
+            {
+                return this.masterBodies;
+            }
+        }
 
         private CollisionManager collisionManager = new CollisionManager();
 
@@ -52,12 +73,12 @@ namespace AntiquePhysicsMono
 
         #region Add Bodies
 
-        public void AddRigidBody(Body body)
+        public void AddSolidBody(Body body)
         {
             solidBodies.Add(body);
             masterBodies.Add(body);
         }
-        public void AddForceBody(Body body)
+        public void AddRigidBody(Body body)
         {
             rigidBodies.Add(body);
             masterBodies.Add(body);
@@ -66,7 +87,7 @@ namespace AntiquePhysicsMono
         {
             masterBodies.Add(body);
         }
-        public void AddRigidForceBody(Body body)
+        public void AddSolidRigidBody(Body body)
         {
             solidBodies.Add(body);
             rigidBodies.Add(body);
@@ -97,7 +118,7 @@ namespace AntiquePhysicsMono
             }
 
             // Collisions
-            //collisionManager.RectCheckCollisions(solidBodies);
+            collisionManager.RectCheckCollisions(solidBodies);
 
         }
 

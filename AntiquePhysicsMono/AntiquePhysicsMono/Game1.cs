@@ -14,6 +14,7 @@ namespace AntiquePhysicsMono
         PhysicsWorld myWorld;
         //RigidBody testBod;
         Body testBod;
+        bool airborne = true;
         VectorControl debugVector;
         Texture2D testBodTex;
         //RigidBody testBlock;
@@ -21,8 +22,9 @@ namespace AntiquePhysicsMono
         Texture2D testBlockTex;
         Texture2D debugT;
         SpriteFont font;
+        MapBuilder mapBuilder = new MapBuilder();
 
-        CollisionManager testCollision = new CollisionManager();
+        //CollisionManager collisionManager = new CollisionManager();
 
         public Game1()
         {
@@ -34,12 +36,12 @@ namespace AntiquePhysicsMono
         {
 
             //myWorld = new AntiqueWorld(0.25f, 0.0f);
-            myWorld = new PhysicsWorld(0.0f);
+            myWorld = new PhysicsWorld(0.5f);
 
             // Character
             //testBod = new RigidBody(new Rectangle(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferWidth / 2, 40, 40), false, false);
-            testBod = new Body(new Rectangle(400, 200, 40, 40), 1.0f);
-            myWorld.AddRigidForceBody(testBod);
+            testBod = new Body(new Rectangle(450, 200, 40, 40), 1.0f);
+            myWorld.AddSolidRigidBody(testBod);
 
             // Debug Point
             debugVector = new VectorControl(testBod.GetBox());
@@ -47,8 +49,13 @@ namespace AntiquePhysicsMono
             // Block
             //testBlock = new RigidBody(new Rectangle(200, 200, 10, 10), true, false);
             testBlock = new Body(new Rectangle(200, 200, 10, 10), 1.0f);
-            myWorld.AddRigidBody(testBlock);
-
+            myWorld.AddSolidBody(testBlock);
+            
+            // Load Map
+            var mapBodies = mapBuilder.BuildFromImage("D:/repo/AntiquePhysics/AntiquePhysicsMono/AntiquePhysicsMono/Content/maps/testMap.png");
+            foreach (Body mapBod in mapBodies)
+                myWorld.AddSolidBody(mapBod);
+            
             base.Initialize();
         }
         
@@ -85,14 +92,23 @@ namespace AntiquePhysicsMono
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            
+
             // Character
+            var jumpSpeed = 30.0f;
             var movementSpeed = 0.85f;
 
             // Up
             if(ButtonHeld(PlayerIndex.One, Buttons.DPadUp)  || KeyHeld(Keys.Up))
             {
-                testBod.EnactForce(new Vector2(0.0f, -movementSpeed));
+                if (!airborne)
+                {
+                    testBod.EnactForce(new Vector2(0.0f, -(jumpSpeed)));
+                    airborne = true;
+                }
+            }
+            else
+            {
+                airborne = false;
             }
 
             // Down
@@ -140,7 +156,6 @@ namespace AntiquePhysicsMono
 
             // Update
             myWorld.Update();
-            testCollision.RectCheckCollisions(testBod, testBlock);
 
             debugVector.Update();
 
@@ -152,8 +167,10 @@ namespace AntiquePhysicsMono
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             
-            // Draw Block
+            // Draw Blocks
             spriteBatch.Draw(testBlockTex, testBlock.GetBox(), Color.White);
+            foreach(Body bod in myWorld.MasterBodies)
+                spriteBatch.Draw(testBlockTex, bod.GetBox(), Color.White);
 
             // Draw Character
             spriteBatch.Draw(testBodTex, testBod.GetBox(), Color.White);
