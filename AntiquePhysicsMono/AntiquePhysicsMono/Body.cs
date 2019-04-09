@@ -29,14 +29,17 @@ namespace AntiquePhysicsMono
     /*abstract*/ class Body
     {
 
+        // Debug
+
+
         // Bounds
-        protected Rectangle box;
-        protected Circle circle;
+        public Rectangle Box { get; set; }
+        public Circle Circle { get; set; }
 
         // Physics
-        private Vector2 velocity;
-        private Vector2 acceleration;
-        private float mass;
+        public Vector2 Velocity { get; set; }
+        public Vector2 Acceleration { get; set; }
+        public float Mass { get; set; }
 
         private const float MAX_VELOCITY = 10.0f;
 
@@ -48,41 +51,41 @@ namespace AntiquePhysicsMono
 
         public Body(Rectangle box/*, bool isSolid, bool interactable*/, float mass)
         {
-            this.box = box;
+            this.Box = box;
             /*
             this.isSolid = isSolid;
             this.interactable = interactable;
             */
-            this.mass = mass;
+            this.Mass = mass;
         }
         /*
         public Body(int x, int y, int width, int height, bool isSolid, bool interactable)
         {
-            this.box = new Rectangle(x, y, width, height);
+            this.Box = new Rectangle(x, y, width, height);
             this.isSolid = isSolid;
             this.interactable = interactable;
         }
         */
         public Body(Circle circle, float mass)
         {
-            this.circle = circle;
-            this.mass = mass;
+            this.Circle = circle;
+            this.Mass = mass;
         }
         
         public void EnactForce(Vector2 force)
         {
 
-            this.acceleration += force / mass;
+            this.Acceleration += force / this.Mass;
 
         }
         public void Accelerate()
         {
 
             // Accelerate
-            this.velocity += acceleration;
+            this.Velocity += this.Acceleration;
 
             // Clamp velocity
-            this.velocity = ClampVelocity(this.velocity);
+            this.Velocity = ClampVelocity(this.Velocity);
 
         }
         public Vector2 ClampVelocity(Vector2 velocity)
@@ -100,14 +103,14 @@ namespace AntiquePhysicsMono
         public void Decelerate(float factor)
         {
 
-            this.velocity *= factor;
+            this.Velocity *= factor;
 
         }
         public void Move(Vector2 trans)
         {
 
             // Offset the bounding box
-            box.Offset(trans);
+            this.Box.Offset(trans);
 
         }
 
@@ -118,34 +121,15 @@ namespace AntiquePhysicsMono
             Accelerate();
             
             // Move
-            Move(this.velocity);
+            Move(this.Velocity);
             
             // Reset acceleration
-            acceleration = Vector2.Zero;
+            this.Acceleration = Vector2.Zero;
 
             // Resistance
             Decelerate(resistance);
 
         }
-        
-        #region Accessors
-
-        public Rectangle GetBox() { return box; }
-        public Circle GetCircle() { return circle; }
-        public Vector2 GetVelocity() { return velocity; }
-        public Vector2 GetAcceleration() { return acceleration; }
-        public float GetMass() { return mass; }
-
-        #endregion
-
-        #region Setters
-
-        public void SetVelocity(Vector2 velocity)
-        {
-            this.velocity = velocity;
-        }
-
-        #endregion
 
     }
 }

@@ -15,7 +15,7 @@ namespace AntiquePhysicsMono
         {
 
             List<Body> bodies = new List<Body>();
-            var bodySize = 10;
+            var bodySize = 40;
 
             Bitmap bitmap = new Bitmap(filePath);
             

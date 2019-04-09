@@ -44,11 +44,11 @@ namespace AntiquePhysicsMono
             myWorld.AddSolidRigidBody(testBod);
 
             // Debug Point
-            debugVector = new VectorControl(testBod.GetBox());
+            debugVector = new VectorControl(testBod.Box);
 
             // Block
             //testBlock = new RigidBody(new Rectangle(200, 200, 10, 10), true, false);
-            testBlock = new Body(new Rectangle(200, 200, 10, 10), 1.0f);
+            testBlock = new Body(new Rectangle(200, 200, 40, 40), 1.0f);
             myWorld.AddSolidBody(testBlock);
             
             // Load Map
@@ -168,26 +168,26 @@ namespace AntiquePhysicsMono
             spriteBatch.Begin();
             
             // Draw Blocks
-            spriteBatch.Draw(testBlockTex, testBlock.GetBox(), Color.White);
+            spriteBatch.Draw(testBlockTex, testBlock.Box, Color.White);    // TODO: This will draw a block under the character
             foreach(Body bod in myWorld.MasterBodies)
-                spriteBatch.Draw(testBlockTex, bod.GetBox(), Color.White);
+                spriteBatch.Draw(testBlockTex, bod.Box, Color.White);
 
             // Draw Character
-            spriteBatch.Draw(testBodTex, testBod.GetBox(), Color.White);
+            spriteBatch.Draw(testBlockTex, testBod.Box, Color.Black);
 
             // Debug
-            var vecPosition = new Vector2(testBod.GetBox().Center.X, testBod.GetBox().Center.Y);
+            var vecPosition = new Vector2(testBod.Box.Center.X, testBod.Box.Center.Y);
 
             spriteBatch.DrawString(font, "Body Velocity: " + testBod.GetVelocity(), Vector2.Zero, Color.Yellow);
             aSpriteBatch.DrawVector(vecPosition, testBod.GetVelocity(), (testBod.GetVelocity().Length() * 5), Color.Red);   // Draw velocity
             
-            var distance = (new Vector2(testBlock.GetBox().Center.X, testBlock.GetBox().Center.Y) - vecPosition);
+            var distance = (new Vector2(testBlock.Box.Center.X, testBlock.Box.Center.Y) - vecPosition);
             var perp = Vector2.Normalize(new Vector2(distance.Y, -distance.X)) * 100;
             var testVec = debugVector.GetPoint();
-            aSpriteBatch.DrawVector(vecPosition, new Vector2(testBlock.GetBox().Center.X, testBlock.GetBox().Center.Y), Color.Green); // Draw distance
+            aSpriteBatch.DrawVector(vecPosition, new Vector2(testBlock.Box.Center.X, testBlock.Box.Center.Y), Color.Green); // Draw distance
             //aSpriteBatch.DrawVector((Vector2.Zero + vecPosition), (vecPosition + testVec), Color.Yellow); // Draw test vector
             aSpriteBatch.DrawVector((Vector2.Zero + vecPosition), (vecPosition + perp), Color.Black);  // Draw perpendicular line
-            aSpriteBatch.DrawProjection(testBod.GetVelocity()/*testVec*/, distance/*projBase*/, new Vector2(testBod.GetBox().Center.X, testBod.GetBox().Center.Y), Color.White); // Draw projection
+            aSpriteBatch.DrawProjection(testBod.GetVelocity()/*testVec*/, distance/*projBase*/, new Vector2(testBod.Box.Center.X, testBod.Box.Center.Y), Color.White); // Draw projection
             
             spriteBatch.End();
             base.Draw(gameTime);
