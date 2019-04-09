@@ -48,14 +48,14 @@ namespace AntiquePhysicsMono
         {
 
             // Move back out
-            bodA.Move(-bodA.GetVelocity());
+            bodA.Move(-bodA.Velocity);
 
             // Shorten bodA to a point (pointA)
-            var pointA = new Vector2(bodA.GetBox().Center.X, bodA.GetBox().Center.Y);
+            var pointA = new Vector2(bodA.Box.Center.X, bodA.Box.Center.Y);
 
             // Expand bodB by extents of bodA (rectB)
-            var rectB = new Rectangle(new Point(bodB.GetBox().Left - (bodA.GetBox().Width / 2), bodB.GetBox().Top - (bodA.GetBox().Height / 2)),
-                new Point(bodB.GetBox().Width + bodA.GetBox().Width, bodB.GetBox().Height + bodA.GetBox().Height));
+            var rectB = new Rectangle(new Point(bodB.Box.Left - (bodA.Box.Width / 2), bodB.Box.Top - (bodA.Box.Height / 2)),
+                new Point(bodB.Box.Width + bodA.Box.Width, bodB.Box.Height + bodA.Box.Height));
 
             // Get minkowski/maDistance
             Vector2 minkowski;
@@ -85,30 +85,24 @@ namespace AntiquePhysicsMono
             }
 
             // Project onto velocity
-            var proj = minkowski.Project(bodA.GetVelocity());
+            var proj = minkowski.Project(bodA.Velocity);
 
             // Resolve velocity
-            if(proj.Length() <= bodA.GetVelocity().Length())
+            if(proj.Length() <= bodA.Velocity.Length())
             {
 
                 // TODO: Can apply friction here
                 var friction = 0.9f;    // Change to body's friction
 
                 if (changeX)
-                    bodA.SetVelocity(new Vector2(
-                        proj.X,
-                        bodA.GetVelocity().Y * friction
-                    ));
+                    bodA.Velocity = new Vector2(proj.X, bodA.Velocity.Y * friction);
                 else
-                    bodA.SetVelocity(new Vector2(
-                        bodA.GetVelocity().X * friction,
-                        proj.Y
-                    ));
+                    bodA.Velocity = new Vector2(bodA.Velocity.X * friction, proj.Y);
 
             }
 
             // Move body
-            bodA.Move(bodA.GetVelocity());
+            bodA.Move(bodA.Velocity);
             
         }
 
@@ -124,15 +118,15 @@ namespace AntiquePhysicsMono
         public bool RectIsColliding(Body bodA, Body bodB)
         {
 
-            return RectIsColliding(bodA.GetBox(), bodB.GetBox());
+            return RectIsColliding(bodA.Box, bodB.Box);
 
         }
 
         public bool CircleIsColliding(Body bodA, Body bodB)
         {
 
-            Circle circleA = bodA.GetCircle();
-            Circle circleB = bodB.GetCircle();
+            Circle circleA = bodA.Circle;
+            Circle circleB = bodB.Circle;
 
             float diff = (circleA.GetCenter() - circleB.GetCenter()).Length();
             float sum = (circleA.GetRadius() + circleB.GetRadius());
@@ -150,8 +144,8 @@ namespace AntiquePhysicsMono
 
             Vector2 distance;
 
-            var xDistance = bodA.GetBox().Center.X - bodB.GetBox().Center.X;
-            var yDistance = bodA.GetBox().Center.Y - bodB.GetBox().Center.Y;
+            var xDistance = bodA.Box.Center.X - bodB.Box.Center.X;
+            var yDistance = bodA.Box.Center.Y - bodB.Box.Center.Y;
 
             distance = new Vector2(xDistance, yDistance);
 
