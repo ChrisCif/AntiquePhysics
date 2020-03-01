@@ -19,7 +19,6 @@ D:\repo\AntiquePhysics\AntiquePhysicsMono\AntiquePhysicsMono\bin\Windows\x86\Deb
 D:\repo\AntiquePhysics\AntiquePhysicsMono\AntiquePhysicsMono\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
 D:\repo\AntiquePhysics\AntiquePhysicsMono\AntiquePhysicsMono\bin\Windows\x86\Debug\SharpDX.XInput.xml
 D:\repo\AntiquePhysics\AntiquePhysicsMono\AntiquePhysicsMono\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
-D:\repo\AntiquePhysics\AntiquePhysicsMono\AntiquePhysicsMono\obj\x86\Debug\AntiquePhysicsMono.csprojResolveAssemblyReference.cache
 D:\repo\AntiquePhysics\AntiquePhysicsMono\AntiquePhysicsMono\obj\x86\Debug\AntiquePhysicsMono.csproj.CoreCompileInputs.cache
 D:\repo\AntiquePhysics\AntiquePhysicsMono\AntiquePhysicsMono\obj\x86\Debug\AntiquePhysicsMono.exe
 D:\repo\AntiquePhysics\AntiquePhysicsMono\AntiquePhysicsMono\obj\x86\Debug\AntiquePhysicsMono.pdb
@@ -57,3 +56,4 @@ C:\Users\Cif\source\repos\AntiquePhysics\AntiquePhysicsMono\AntiquePhysicsMono\b
 C:\Users\Cif\source\repos\AntiquePhysics\AntiquePhysicsMono\AntiquePhysicsMono\bin\Windows\x86\Debug\Content\debugTexture.xnb
 D:\repo\AntiquePhysics\AntiquePhysicsMono\AntiquePhysicsMono\bin\Windows\x86\Debug\Content\danny.xnb
 D:\repo\AntiquePhysics\AntiquePhysicsMono\AntiquePhysicsMono\bin\Windows\x86\Debug\Content\debugTexture.xnb
+D:\repo\AntiquePhysics\AntiquePhysicsMono\AntiquePhysicsMono\obj\x86\Debug\AntiquePhysicsMono.csprojResolveAssemblyReference.cache

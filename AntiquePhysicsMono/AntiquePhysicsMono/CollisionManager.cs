@@ -47,6 +47,61 @@ namespace AntiquePhysicsMono
         public void RectCorrectCollision(Body bodA, Body bodB)
         {
 
+            bool oneStationary = (bodA.Velocity.Length() != bodB.Velocity.Length());
+            bool bothStationary = (bodA.Velocity.Length() == 0 && bodA.Velocity.Length() == 0);
+
+            if (oneStationary)
+            {
+
+                // Get moving velocity
+                Body moving = bodA.Velocity.Length() != 0 ? bodA : bodB;
+                Vector2 originalV = moving.Velocity;
+
+                // Get overlapping rectangle
+                Rectangle overlap = Rectangle.Intersect(bodA.Box, bodB.Box);
+
+                // Get overlap slope
+                float ovSlope = Math.Abs(overlap.Height / overlap.Width);
+
+                // Compare slopes
+                float correctionX;
+                float correctionY;
+                if (Math.Abs(originalV.Y / originalV.X) > ovSlope)
+                {
+
+                    // Find X
+                    correctionY = overlap.Height * (originalV.Y / Math.Abs(originalV.Y));
+                    //correctionX = (correctionY * originalV.X) / originalV.Y;
+                    correctionX = 0f;
+                    moving.Velocity = new Vector2(originalV.X, 0.0f);
+
+                }
+                else
+                {
+
+                    // Find Y
+                    correctionX = overlap.Width * (originalV.X / Math.Abs(originalV.X));
+                    //correctionY = (correctionX * originalV.Y) / originalV.X;
+                    correctionY = 0f;
+                    moving.Velocity = new Vector2(0.0f, originalV.Y);
+
+                }
+
+                Vector2 correction = new Vector2(correctionX, correctionY);
+                moving.Move(-correction);
+
+            }
+            else if (bothStationary)
+            {
+                return;
+            }
+
+        }
+
+        /*
+        public void RectCorrectCollision(Body bodA, Body bodB)
+        {
+
             // Move back out
             bodA.Move(-bodA.Velocity);
 
@@ -105,6 +160,7 @@ namespace AntiquePhysicsMono
             bodA.Move(bodA.Velocity);
             
         }
+        */
 
         public bool RectIsColliding(Rectangle rectA, Rectangle rectB)
         {

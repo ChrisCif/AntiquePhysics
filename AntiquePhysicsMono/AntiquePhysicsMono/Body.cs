@@ -42,6 +42,7 @@ namespace AntiquePhysicsMono
         public float Mass { get; set; }
 
         private const float MAX_VELOCITY = 10.0f;
+        private const float MIN_VELOCITY = 0.5f;
 
         //protected bool isSolid; // Whether or not collisions are calculated for this body
         //protected bool interactable;    // Whether or not collisions are allowed with creatures
@@ -105,13 +106,18 @@ namespace AntiquePhysicsMono
 
             this.Velocity *= factor;
 
+            if (this.Velocity.Length() < MIN_VELOCITY)
+                this.Velocity = Vector2.Zero;
+
         }
         public void Move(Vector2 trans)
         {
 
             // Offset the bounding box
-            this.Box.Offset(trans);
+            //this.Box.Offset(trans);
 
+            this.Box = new Rectangle( (int)(this.Box.Location.X + trans.X), (int)(this.Box.Location.Y + trans.Y), this.Box.Width, this.Box.Height);
+            
         }
 
         public void Update(float resistance)
@@ -119,17 +125,17 @@ namespace AntiquePhysicsMono
             
             // Accelerate
             Accelerate();
-            
+
+            // Resistance
+            Decelerate(resistance);
+
             // Move
             Move(this.Velocity);
             
             // Reset acceleration
             this.Acceleration = Vector2.Zero;
-
-            // Resistance
-            Decelerate(resistance);
-
+            
         }
-
+        
     }
 }

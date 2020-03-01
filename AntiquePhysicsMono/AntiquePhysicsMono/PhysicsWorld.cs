@@ -100,9 +100,9 @@ namespace AntiquePhysicsMono
         // Updates
         public void Update()
         {
-
+            
             // Enact forces on bodies
-            foreach(Body body in rigidBodies)
+            foreach (Body body in rigidBodies)
             {
 
                 WorldForces(body);
