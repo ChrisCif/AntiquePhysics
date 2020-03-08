@@ -55,10 +55,14 @@ namespace AntiquePhysicsMono
 
                 // Get moving velocity
                 Body moving = bodA.Velocity.Length() != 0 ? bodA : bodB;
+                Body stationary = bodA.Velocity.Length() != 0 ? bodB : bodA;
                 Vector2 originalV = moving.Velocity;
 
                 // Get overlapping rectangle
                 Rectangle overlap = Rectangle.Intersect(bodA.Box, bodB.Box);
+
+                // Get distance vector
+                Vector2 distance = new Vector2((moving.Box.Center.X - stationary.Box.Center.X), (moving.Box.Center.Y - stationary.Box.Center.Y));
 
                 // Get overlap slope
                 float ovSlope = Math.Abs(overlap.Height / overlap.Width);
@@ -69,9 +73,8 @@ namespace AntiquePhysicsMono
                 if (Math.Abs(originalV.Y / originalV.X) > ovSlope)
                 {
 
-                    // Find X
-                    correctionY = overlap.Height * (originalV.Y / Math.Abs(originalV.Y));
-                    //correctionX = (correctionY * originalV.X) / originalV.Y;
+                    // Push Vertically
+                    correctionY = overlap.Height * (stationary.Box.Center.Y > moving.Box.Center.Y ? -1 : 1);
                     correctionX = 0f;
                     moving.Velocity = new Vector2(originalV.X, 0.0f);
 
@@ -79,16 +82,14 @@ namespace AntiquePhysicsMono
                 else
                 {
 
-                    // Find Y
-                    correctionX = overlap.Width * (originalV.X / Math.Abs(originalV.X));
-                    //correctionY = (correctionX * originalV.Y) / originalV.X;
+                    // Push Horizontally
+                    correctionX = overlap.Width * (stationary.Box.Center.X > moving.Box.Center.X ? -1 : 1);
                     correctionY = 0f;
                     moving.Velocity = new Vector2(0.0f, originalV.Y);
 
                 }
-
-                Vector2 correction = new Vector2(correctionX, correctionY);
-                moving.Move(-correction);
+                
+                moving.Move(new Vector2(correctionX, correctionY));
 
             }
             else if (bothStationary)

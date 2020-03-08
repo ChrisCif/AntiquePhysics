@@ -91,7 +91,7 @@ namespace AntiquePhysicsMono
 
             // Character
             var jumpSpeed = 30.0f;
-            var movementSpeed = 0.85f;
+            var movementSpeed = 0.6f;
 
             // Up
             /*
@@ -129,6 +129,27 @@ namespace AntiquePhysicsMono
             if (ButtonHeld(PlayerIndex.One, Buttons.DPadLeft) || KeyHeld(Keys.Left))
             {
                 testBod.EnactForce(new Vector2(-movementSpeed, 0.0f));
+            }
+
+            // Diagonal - Used for collision testing
+            if (KeyHeld(Keys.NumPad1))
+            {
+                testBod.EnactForce(new Vector2(-movementSpeed, movementSpeed));
+            }
+            // Diagonal - Used for collision testing
+            if (KeyHeld(Keys.NumPad2))
+            {
+                testBod.EnactForce(new Vector2(movementSpeed, movementSpeed));
+            }
+            // Diagonal - Used for collision testing
+            if (KeyHeld(Keys.NumPad4))
+            {
+                testBod.EnactForce(new Vector2(-movementSpeed, -movementSpeed));
+            }
+            // Diagonal - Used for collision testing
+            if (KeyHeld(Keys.NumPad5))
+            {
+                testBod.EnactForce(new Vector2(movementSpeed, -movementSpeed));
             }
 
             // Debug Vector
